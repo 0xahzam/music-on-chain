@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    @font-face{
+      font-family: 'Beatrice';
+      src: url(../pages/fonts/Beatrice.woff);
+    }
+    
+    @font-face{
+      font-family: 'Satoshi';
+      src: url(../pages/fonts/Satoshi-Regular.otf);
+    }
+
+    .custom { font-family: 'Beatrice'; }
+
+    .custom2 { font-family: 'Satoshi'; }
+
+    .border-he { border: .5px #fff solid; }
+
+    .gradient-bg {
+        background: linear-gradient(90deg, #2A0134 0%, #013925 100%);
+    }
+
+    .circle{
+      @apply h-4xl w-4xl rounded-full blur-4xl absolute
+    }
+}
