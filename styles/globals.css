@@ -13,17 +13,22 @@
       src: url(../pages/fonts/Satoshi-Regular.otf);
     }
 
+    .imag{ 
+      background-image: url(../public/eclipses.png);
+      background-size: cover; 
+    
+    }
+
     .custom { font-family: 'Beatrice'; }
 
     .custom2 { font-family: 'Satoshi'; }
 
-    .border-he { border: .5px #fff solid; }
+    .borderss{ border: .25px #707070 solid; }
 
     .gradient-bg {
         background: linear-gradient(90deg, #2A0134 0%, #013925 100%);
     }
 
-    .circle{
-      @apply h-4xl w-4xl rounded-full blur-4xl absolute
-    }
+    .green{ color:  #2EBD59;}
+
 }

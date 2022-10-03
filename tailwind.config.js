@@ -19,18 +19,6 @@ module.exports = {
         'purple': '#CC00FF80',
         'blue': '#0F96F994',
       },
-
-      height: {
-        '4xl': '600px'
-      },
-
-      width: {
-        '4xl': '600px'
-      },
-
-      blur: {
-        '4xl': '300px',
-      }
     },
   },
   plugins: [],

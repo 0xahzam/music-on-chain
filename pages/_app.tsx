@@ -32,19 +32,21 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider 
-        chains={chains} 
-        theme={darkTheme({
-          accentColor: '#224039',
-          accentColorForeground: 'white',
-          borderRadius: 'small',
-        })} 
-        coolMode
-      >
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <div>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider 
+          chains={chains} 
+          theme={darkTheme({
+            accentColor: '#ffffff14', //bg
+            accentColorForeground: 'white', // color
+            borderRadius: 'small', 
+          })} 
+          coolMode
+        >
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </div>
   );
 }
 
