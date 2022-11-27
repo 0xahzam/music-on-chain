@@ -10,50 +10,29 @@ export type Post = {
   songLink: string;
 };
 
-const dummyPosts: Post[] = [
-  {
-    text: 'This is a post',
-    imgSrc: 'https://i.imgur.com/4Z5wQ0x.jpg',
-    songLink:
-      'https://open.spotify.com/track/6y0igZArWVi6Iz0rj35c1Y?si=6c8f9c3f4f3a4f0d',
-  },
-  {
-    text: 'This is another post',
-    imgSrc: 'https://i.imgur.com/4Z5wQ0x.jpg',
-    songLink:
-      'https://open.spotify.com/track/6y0igZArWVi6Iz0rj35c1Y?si=6c8f9c3f4f3a4f0d',
-  },
-  {
-    text: 'This is a third post',
-    imgSrc: 'https://i.imgur.com/4Z5wQ0x.jpg',
-    songLink:
-      'https://open.spotify.com/track/6y0igZArWVi6Iz0rj35c1Y?si=6c8f9c3f4f3a4f0d',
-  },
-];
+let imgLink =
+'https://images.unsplash.com/photo-1546514355-7fdc90ccbd03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fG5hdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60';
+
+// const dummyPosts: Post[] = [];
 
 const Home: NextPage = () => {
-  let imgLink =
-    'https://images.unsplash.com/photo-1546514355-7fdc90ccbd03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fG5hdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60';
 
   const [desc, setDesc] = useState('');
   const [search, setSearch] = useState('');
   const [id, setId] = useState('');
   const [token, setToken] = useState('');
-  const [posts, setPosts] = useState([
-    {
-      desc: 'hehehehee',
-      img: imgLink,
-      songLink: 'ok',
-    },
-  ]);
+  const [posts, setPosts] = useState([])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     const id = e.target.value;
-    const iditem = id.split('/')[4];
-    const idmain = iditem.split('?')[0];
-    setId(idmain);
-    console.log(idmain);
+    if(id.length === 73){
+      const iditem = id.split('/')[4];
+      const idmain = iditem.split('?')[0];
+      setId(idmain);
+      console.log(idmain);
+    }
+    
   };
 
   const CLIENT_ID = '987150daf0054c7ca891b415d72b457f';
@@ -89,16 +68,20 @@ const Home: NextPage = () => {
     )
       .then((resp) => resp.json())
       .then((res) => {
-        // console.log(res);
 
-        const newPost = {
-          desc: desc,
-          img: res.album.images[1].url,
+        const newPost = [{
+          text: desc,
+          imgSrc: res.album.images[1].url,
           songLink: res.external_urls.spotify,
-        };
+        }]
 
-        setPosts([...posts, newPost]);
-        console.log(posts);
+        // const hw = []
+        // hw.push(newPost)
+        setPosts(newPost, ...posts);
+
+        setSearch('')
+        setDesc('')
+        setId('')
       });
   };
 
@@ -113,19 +96,14 @@ const Home: NextPage = () => {
           </div>
 
           <div className='bg-white text-white bg-opacity-5 rounded-md p-5 mt-10 custom2 borderss'>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam Lorem ipsum dolor sit amet Lorem ipsum dolor
-              elitsa.
-            </p>
+            <textarea value={desc} onChange={e => setDesc(e.target.value)}  className='bg-transparent border-none outline-none w-full whitespace-normal resize-none' placeholder='Write the description...' />
 
             <div className='flex justify-between items-stretch mt-4 relative'>
               <BsSpotify className='absolute green text-3xl top-2 left-4' />
 
               <input
                 value={search}
-                onChange={handleChange}
+                onChange = {handleChange}
                 placeholder='https://open.spotify.com/track/6GD1eomgaGT1Epto'
                 className='bg-white bg-opacity-10 px-3 py-2 outline-none rounded-md w-full mr-4 pl-16'
                 type='text'
@@ -152,11 +130,12 @@ const Home: NextPage = () => {
 
         {/* Posts */}
         <div className='flex flex-col gap-8'>
-          {dummyPosts.map((post) => (
+          {posts.map((post) => (
             <PostComponent post={post} />
           ))}
         </div>
       </div>
+
     </div>
   );
 };
